@@ -17,11 +17,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/register', function () {
-    return view('register');
-});
+
 Auth::routes();
 
 
-
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/publication/create', 'PublicationController@create');
+Route::post('/publication', 'PublicationController@store');
+
+
