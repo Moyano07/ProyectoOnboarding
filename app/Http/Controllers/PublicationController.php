@@ -13,6 +13,11 @@ class PublicationController extends Controller
         $this->middleware('auth');
     }
 
+    public function index(){
+        $publications = Publication::all();
+        return view('publication.list',compact('publications'));
+    }
+
     public function create()
     {
         return view('publication.create');

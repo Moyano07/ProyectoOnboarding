@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'GuestController@index');
+Route::get('/','HomeController@index')->name('home');
 
 
 Auth::routes();
@@ -21,6 +21,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/publications', 'PublicationController@index');
 Route::get('/publication/create', 'PublicationController@create');
 Route::post('/publication', 'PublicationController@store');
 

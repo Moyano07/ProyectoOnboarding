@@ -1,77 +1,62 @@
-@extends('layouts.app')
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Meta -->
+    <meta name="description" content="Premium Quality and Responsive UI for Dashboard.">
+    <meta name="author" content="ThemePixels">
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
+    <!-- Bracket CSS -->
+    <link href="{{ asset('css/bracket.css') }}" rel="stylesheet">
+  </head>
 
-                <div class="card-body">
+                <div >
+
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
+                        <div class="d-flex flex-column align-items-center justify-content-center bg-br-primary ht-100v">
 
-                        <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+                            <div class="login-wrapper wd-500 wd-xs-450 pd-15 bg-white h-40 rounded-top">{{ __('Register') }}</div>
 
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                            <div class="login-wrapper wd-500 wd-xs-450 pd-25 pd-xs-40 bg-white rounded-bottom  shadow-base">
 
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
+                                    <x-package-input
+                                    type="name" name="name" value="{{ old('name') }}"
+                                    placeholder="{{ __('Name') }}"
+                                    required="true"
+                                    :message=`{{ $message }}`
+                                    />
+                                    <x-package-input
+                                    type="email" name="email" value="{{ old('email') }}"
+                                    placeholder="{{ __('E-Mail Address') }}"
+                                    required="true"
+                                    :message=`{{ $message }}`
+                                    />
 
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                                    <x-package-input
+                                    type="password" name="password" value="{{ old('oassword') }}"
+                                    placeholder="{{ __('Password') }}"
+                                    required="true"
+                                    :message={{ $message }}
+                                    />
+                                    <div class="form-group mb-3">
+                                        <input id="password-confirm"
+                                          class="form-control "
+                                          placeholder="{{ __('Confirm Password')  }}"
+                                          type="password" class="form-control"
+                                          name="password_confirmation"
+                                          required autocomplete="new-password">
+                                    </div>
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
 
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
+                                <button type="submit" class="btn btn-info btn-block">Register</button>
 
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                                <div class="mg-t-60 tx-center">Already a member? <a href="{{ route('login') }}"class="tx-info">Sign In</a></div>
 
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
 
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
+                           </div><!-- login-wrapper -->
+                        </div><!-- d-flex -->
+                     </form>
 
-                        <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
-@endsection
+
