@@ -11,6 +11,9 @@
                             @endif
                         @else
                         <li class="nav-item">
+                            <a class="nav-link" href="{{ url('/ldap/user/list') }}">User Ldap List</a>
+                        </li>
+                        <li class="nav-item">
                                 <a class="nav-link" href="{{ url('/publication/create') }}">New Publication</a>
                             </li>
                             <li class="nav-item dropdown">
