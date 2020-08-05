@@ -5,6 +5,10 @@ namespace App\Services;
 
 class LdapService{
 
+    public function __construct()
+    {
+
+    }
 
     public static function connection()
     {
@@ -30,5 +34,27 @@ class LdapService{
         }
 
 
+    }
+
+    public function getUsers()
+    {
+        $provider =  self::connection();
+
+        return $provider->search()->select(['cn', 'samaccountname', 'department', 'mail','group','objectGUID'])->get();
+    }
+
+    public static function convertObjectGUID2Str($oguid) {
+
+        $hex_guid = bin2hex($oguid);
+        $hex_guid_to_guid_str = '';
+        for($k = 1; $k <= 4; ++$k) { $hex_guid_to_guid_str .= substr($hex_guid, 8 - 2 * $k, 2); }
+        $hex_guid_to_guid_str .= '-';
+        for($k = 1; $k <= 2; ++$k) { $hex_guid_to_guid_str .= substr($hex_guid, 12 - 2 * $k, 2); }
+        $hex_guid_to_guid_str .= '-';
+        for($k = 1; $k <= 2; ++$k) { $hex_guid_to_guid_str .= substr($hex_guid, 16 - 2 * $k, 2); }
+        $hex_guid_to_guid_str .= '-' . substr($hex_guid, 16, 4);
+        $hex_guid_to_guid_str .= '-' . substr($hex_guid, 20);
+        //dump($hex_guid_to_guid_str);die;
+        return strtoupper($hex_guid_to_guid_str);
     }
 }

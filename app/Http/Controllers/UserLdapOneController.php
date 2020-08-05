@@ -2,17 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use Adldap\Models\Attributes\Guid;
+use App\Repository\UserLdapOneRepository;
 use App\UserLdapOne;
 use Illuminate\Http\Request;
 use App\Services\LdapService;
 
 class UserLdapOneController extends Controller
 {
-    private $provider;
+    private $ldapService;
 
-    public function __construct()
+    private $userLdapOnesRepository;
+
+    public function __construct(LdapService $ldapService,
+                                UserLdapOneRepository $userLdapOnesRepository)
     {
-        $this->provider = LdapService::connection();
+        $this->ldapService = $ldapService;
+        $this->userLdapOnesRepository = $userLdapOnesRepository;
     }
     /**
      * Display a listing of the resource.
@@ -21,10 +27,24 @@ class UserLdapOneController extends Controller
      */
     public function index()
     {
-        $users = $this->provider->search()->users()->get();
-    //$results = $provider->search()->select(['telephone', 'mail']);
 
-    return view('ldap.userList',compact('users'));
+        $users = $this->ldapService->getUsers();
+        $usersApp =[];
+        foreach ($users as $user) {
+            $usersApp[] = [
+                'samAccountName' => $user->samAccountName[0]?? null,
+                'name'=> $user->cn[0]?? null,
+                'email' => $user->mail[0]?? null,
+                'department' => $user->department[0]?? null,
+                'groups' => null,
+                'objectGUID' => $user->objectGUID !==null?$this->ldapService->convertObjectGUID2Str($user->objectGUID[0]): null
+
+            ];
+        }
+
+        $this->userLdapOnesRepository->insertOrIgnore($usersApp);
+
+        return view('ldap.userList',compact('users'));
     }
 
     /**

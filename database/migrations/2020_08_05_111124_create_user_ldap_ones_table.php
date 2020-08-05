@@ -16,11 +16,12 @@ class CreateUserLdapOnesTable extends Migration
         Schema::create('user_ldap_ones', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('samAccountName');
-            $table->string('name');
+            $table->string('samAccountName')->nullable();
+            $table->string('name')->nullable();
             $table->string('email')->nullable();
-            $table->string('departmeny');
+            $table->string('department')->nullable();
             $table->json('groups')->nullable();
+            $table->string('objectGUID')->nullable();
         });
     }
 
