@@ -24,7 +24,7 @@ Route::get('/publication/create', 'PublicationController@create');
 Route::post('/publication', 'PublicationController@store');
 
 //Ldap
-Route::get('/ldap/user/list', 'LdapController@userList');
+Route::get('/ldap/user/list', 'UserLdapOneController@index');
 
 
 
