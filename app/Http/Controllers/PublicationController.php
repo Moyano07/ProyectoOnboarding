@@ -18,7 +18,7 @@ class PublicationController extends Controller
         return view('publication.list',compact('publications'));
     }
 
-    public function create()
+    public function create(Request $request)
     {
         return view('publication.create');
     }

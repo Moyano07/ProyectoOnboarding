@@ -18,13 +18,19 @@ Auth::routes();
 Route::get('/','HomeController@index')->name('home');
 Route::get('/home', 'HomeController@index')->name('home');
 
+//User
+Route::get('/user/list', 'UserController@index');
+Route::get('/user/destroy/{id}', 'UserController@destroy');
+Route::get('/user/store', 'UserController@store');
+
 //Publication
-Route::get('/publications', 'PublicationController@index');
+Route::get('/publication/list', 'PublicationController@index');
 Route::get('/publication/create', 'PublicationController@create');
 Route::post('/publication', 'PublicationController@store');
 
 //Ldap
 Route::get('/ldap/user/list', 'UserLdapOneController@index');
+
 
 
 

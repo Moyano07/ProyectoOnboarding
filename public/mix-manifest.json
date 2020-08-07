@@ -1,6 +1,8 @@
 {
     "/js/app.js": "/js/app.js",
+    "/js/bootstrap.js": "/js/bootstrap.js",
+    "/js/jquery-ui.js": "/js/jquery-ui.js",
     "/css/app.css": "/css/app.css",
     "/css/bracket.css": "/css/bracket.css",
-    "/js/bootstrap.js": "/js/bootstrap.js"
+    "/js/select2.min.js": "/js/select2.min.js"
 }

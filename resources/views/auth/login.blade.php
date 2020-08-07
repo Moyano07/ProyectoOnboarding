@@ -35,12 +35,19 @@
                                     :message={{ $message }}
                                     />
 
+                                <div d-flex>
+                                    <label>Selecciona un metodo de login </label>
+                                    <select name="methodLogin" required>
+                                        <option value="local" selected="true">Local</option>
+                                        <option value="ldap">Ldap</option>
+                                    </select>
+                                </div>
+                                <button type="submit" class="btn btn-info btn-block">Sign In</button>
                                 @if (Route::has('password.request'))
                                 <a class="btn btn-link pt-0" href="{{ route('password.request') }}">
                                         {{ __('Forgot Your Password?') }}
                                     </a>
                                 @endif
-                                <button type="submit" class="btn btn-info btn-block">Sign In</button>
 
 
                                 <div class="mg-t-60 tx-center">Not yet a member? <a href="{{ route('register') }}"class="tx-info">Sign Up</a></div>

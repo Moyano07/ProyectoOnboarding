@@ -2,6 +2,9 @@
 
 namespace App\Services;
 
+use Illuminate\Http\Request;
+
+
 
 class LdapService{
 
@@ -15,7 +18,7 @@ class LdapService{
         $ad = new \Adldap\Adldap();
 
         $config = [
-            'hosts'             => ['','172.17.17.47'],
+            'hosts'             => ['','172.17.17.46'],
             'port'           => '389',
             'username'          => 'onevision',
             'password'          => 'yawinu178$',
@@ -41,6 +44,18 @@ class LdapService{
         $provider =  self::connection();
 
         return $provider->search()->select(['cn', 'samaccountname', 'department', 'mail','group','objectGUID'])->get();
+    }
+
+    public function loginCredentials(Request $request)
+    {
+        $provider =  self::connection();
+        try {
+        return $provider->auth()->attempt($request->email, $request->password, $bindAsUser = true);
+        //dump($e);die;
+        }catch (\Adldap\Auth\BindException $e) {
+            echo 'Error: '.$e->getMessage()."\r\n";
+            return false;
+        }
     }
 
     public static function convertObjectGUID2Str($oguid) {
